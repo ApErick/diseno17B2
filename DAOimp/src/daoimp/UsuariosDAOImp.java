@@ -26,18 +26,8 @@ public class UsuariosDAOImp implements UsuariosDao{
     private static Statement stmt = null;
     private static String tableName = "usuario";
 
-    
-  
-    private static void createConnection(){   
-        try{
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            conn = DriverManager.getConnection(dbURL); 
-        }catch (Exception except){
-            except.printStackTrace();
-        }
-    }
 
-    public static void setConn(Connection conn) {
+    public void setConn(Connection conn) {
         UsuariosDAOImp.conn = conn;
     }
 
@@ -45,9 +35,8 @@ public class UsuariosDAOImp implements UsuariosDao{
     public void crearUser(Usuario u) {
         try{
             stmt = conn.createStatement();
-            String bloqueado="false";
-            stmt.execute("insert into " + tableName + " values (" + "','"+
-                    u.getUsuario() + ",'" + u.getPass() + "','" + u.getCorreo() + "','" + u.getNombre() + "','"+u.getApp()+ "','"+u.getApm()+ "','"+u.getEdad()+ "','" +u.getFace()+ "','"+bloqueado+"')");
+            int bloqueado=0;
+            stmt.execute("insert into usuario (usr,pass,email,nom,app,apm,edad,face,bloqueado) values('"+u.getUsuario()+"','"+u.getPass()+"','"+u.getCorreo()+"','"+u.getNombre()+"','"+u.getApp()+"','"+u.getApm()+"',13,'"+u.getFace()+"',0)");
             stmt.close();
         }
         catch (SQLException sqlExcept){
