@@ -45,22 +45,22 @@ public class UsuariosDAOImp implements UsuariosDao{
     }
 
     @Override
-    public boolean editaUser(Usuario u) {
-        Boolean ban=false;
+    public void editaUser(Usuario u) {
         try{
-            stmt = conn.createStatement();            
-            ban = stmt.execute("update "+tableName+"set pass="+u.getPass()+",nom="+u.getNombre()+",app="+u.getApp()+",apm="+u.getApm()+",edad="+u.getEdad()+",face="+u.getFace()+"where usr="+u.getUsuario());
+            stmt = conn.createStatement();
+            //stmt.execute("update "+tableName+"set pass='"+u.getPass()+"', nom='"+u.getNombre()+"', app='"+u.getApp()+"', apm='"+u.getApm()+"', edad="+u.getEdad()+", face='"+u.getFace()+"' where email='"+u.getCorreo()+"'");
+            stmt.execute("update usuario set usr='"+u.getUsuario()+"', pass='"+u.getPass()+"', nom='"+u.getNombre()+"', app='"+u.getApp()+"', apm='"+u.getApm()+"', edad="+u.getEdad()+", face='"+u.getFace()+"', bloqueado=0 where email='"+u.getCorreo()+"'");
             stmt.close();
         }
         catch (SQLException sqlExcept){
             sqlExcept.printStackTrace();
         }
-        return ban;
     }
     
      @Override
-    public String[] consultaUser(String us){
+    public Usuario consultaUser(Usuario u){
         String[] arr = null;
+        String us = u.getUsuario();
         try{
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from "+tableName+"where usr="+us);
@@ -81,14 +81,14 @@ public class UsuariosDAOImp implements UsuariosDao{
         catch (SQLException sqlExcept){
             sqlExcept.printStackTrace();
         }
-        return arr;
+        return u;
     }
 
     @Override
     public void eliminaUser(Usuario u) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+/*
     @Override
     public boolean buscauser(Usuario u) {
         Boolean ban = false; 
@@ -150,6 +150,6 @@ public class UsuariosDAOImp implements UsuariosDao{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
+*/
     
 }
