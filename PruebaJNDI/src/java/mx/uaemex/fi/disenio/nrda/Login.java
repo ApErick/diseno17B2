@@ -1,3 +1,5 @@
+package mx.uaemex.fi.disenio.nrda;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -40,6 +42,7 @@ public class Login extends HttpServlet{
     private DataSource ds;
     public String username;
     public String password;
+    public String paswd;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -63,18 +66,22 @@ public class Login extends HttpServlet{
             password=request.getParameter("password");
             u.setUser(username);
             uR = daoInt.consultaUser(u);
-            if(uR == null){
-                out.println("<h1>NULOS </h1>");
-            } else {
-                if(uR.getUsuario()!=username || uR.getPass()!=password){
-                    out.println("<h1>USUARIO O CONTRASEÑA INCORRECTA</h1>");
-                     out.println("DB USER: "+uR.getUsuario()+"");
-                     out.println("DB PASS: "+uR.getPass()+"");
-                     out.println("USUARIO F: "+username+"");
-                     out.println("PASS F:"+password+"");
-                }else{
+            paswd=uR.getPass();
+            String usrbd=uR.getUsuario();
+            System.out.println(usrbd);
+            if(usrbd!=null){
+                if(password.equals(paswd)){
                     out.println("<h1>BIENVENIDO</h1>");
+                    out.println("<h3>"+uR.getNombre()+"</h3>");
+                }else {
+                     out.println("<h1>USUARIO O CONTRASEÑA INCORRECTA</h1>");
+                     out.println("<br>DB USER: "+uR.getUsuario()+"");
+                     out.println("<br>DB PASS: "+uR.getPass()+"");
+                     out.println("<br>USUARIO F: "+username+"");
+                     out.println("<br>PASS F:"+password+"");
                 }
+            } else{
+                out.println("<h1>USUARIO O CONTRASEÑA INCORRECTA</h1>");
             }
            
             out.println("</body>");
