@@ -20,11 +20,11 @@ import java.util.ArrayList;
  */
 public class UsuariosDAOImp implements UsuariosDao{
     
-    private static String dbURL ="jdbc:derby://localhost:1527/juegos;";
+    private static String dbURL ="jdbc:derby://localhost:1527/arena;";
     
     public static Connection conn = null;
     private static Statement stmt = null;
-    private static String tableName = "usuario";
+    private static String tableName = "app.usuario";
 
 
     public void setConn(Connection conn) {
@@ -64,9 +64,10 @@ public class UsuariosDAOImp implements UsuariosDao{
         try{
             
             stmt = conn.createStatement();
+            int ban = 0;
             ResultSet rs = stmt.executeQuery("select * from "+tableName+" where usr='"+u.getUsuario()+"'");
-            System.out.println("RECIBE BD: "+rs.getString("usr")+"");
-            if(rs != null){            
+            //System.out.println("RECIBE BD: "+rs.getString(1));
+            while(rs.next()){            
              u.setUser(rs.getString("usr"));
              u.setPass(rs.getString("pass"));
              u.setCorreo(rs.getString("email"));
@@ -76,8 +77,19 @@ public class UsuariosDAOImp implements UsuariosDao{
              u.setEdad(Integer.parseInt(rs.getString("edad")));
              u.setFace(rs.getString("face"));
              u.setBloqueado(Integer.parseInt(rs.getString("bloqueado")));
-            } else {
-                u = null;
+             ban=1;   
+            } 
+            if (ban==0) {
+                System.out.println("HAY NULOS");
+                u.setUser(null);
+                u.setPass(null);
+                u.setCorreo(null);
+                u.setNombre(null);
+                u.setApp(null);
+                u.setApm(null);
+                u.setEdad(0);
+                u.setFace(null);
+                u.setBloqueado(0);
             }
                 
             stmt.close();
