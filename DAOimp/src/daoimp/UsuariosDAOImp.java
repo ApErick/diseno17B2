@@ -20,9 +20,9 @@ import java.util.ArrayList;
  */
 public class UsuariosDAOImp implements UsuariosDao{
     
-    private static String dbURL ="jdbc:derby://localhost:1527/arena;";
+    private static String dbURL ="jdbc:derby://localhost:1527/juegos;";
     
-    private static Connection conn = null;
+    public static Connection conn = null;
     private static Statement stmt = null;
     private static String tableName = "usuario";
 
@@ -59,23 +59,27 @@ public class UsuariosDAOImp implements UsuariosDao{
     
      @Override
     public Usuario consultaUser(Usuario u){
-        String[] arr = null;
-        String us = u.getUsuario();
+        System.out.println("RECIBE LOGIN: "+u.getUsuario()+"");
+        
         try{
+            
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from "+tableName+"where usr="+us);
-            while(rs.next()){
-                arr[0] = rs.getString(1);
-                arr[1] = rs.getString(2);
-                arr[2] = rs.getString(3);
-                arr[3] = rs.getString(4);
-                arr[4] = rs.getString(5);
-                arr[5] = rs.getString(6);
-                arr[6] = rs.getString(7);
-                arr[7] = rs.getString(8);
-                arr[8] = rs.getString(9);
-                arr[9] = rs.getString(10);
+            ResultSet rs = stmt.executeQuery("select * from "+tableName+" where usr='"+u.getUsuario()+"'");
+            System.out.println("RECIBE BD: "+rs.getString("usr")+"");
+            if(rs != null){            
+             u.setUser(rs.getString("usr"));
+             u.setPass(rs.getString("pass"));
+             u.setCorreo(rs.getString("email"));
+             u.setNombre(rs.getString("nom"));
+             u.setApp(rs.getString("app"));
+             u.setApm(rs.getString("apm"));
+             u.setEdad(Integer.parseInt(rs.getString("edad")));
+             u.setFace(rs.getString("face"));
+             u.setBloqueado(Integer.parseInt(rs.getString("bloqueado")));
+            } else {
+                u = null;
             }
+                
             stmt.close();
         }
         catch (SQLException sqlExcept){
