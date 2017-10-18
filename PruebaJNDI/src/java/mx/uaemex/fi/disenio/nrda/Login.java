@@ -68,20 +68,15 @@ public class Login extends HttpServlet{
             uR = daoInt.consultaUser(u);
             paswd=uR.getPass();
             String usrbd=uR.getUsuario();
-            System.out.println(usrbd);
             if(usrbd!=null){
                 if(password.equals(paswd)){
                     out.println("<h1>BIENVENIDO</h1>");
-                    out.println("<h3>"+uR.getNombre()+"</h3>");
+                    out.println("<h4>"+uR.getNombre()+"</h4>");
                 }else {
                      out.println("<h1>USUARIO O CONTRASEÑA INCORRECTA</h1>");
-                     out.println("<br>DB USER: "+uR.getUsuario()+"");
-                     out.println("<br>DB PASS: "+uR.getPass()+"");
-                     out.println("<br>USUARIO F: "+username+"");
-                     out.println("<br>PASS F:"+password+"");
                 }
             } else{
-                out.println("<h1>USUARIO O CONTRASEÑA INCORRECTA</h1>");
+                out.println("<h1>ACCESO DENEGADO!<br/></h1><h3>USUARIO O CONTRASEÑA INCORRECTA<h3>");
             }
            
             out.println("</body>");

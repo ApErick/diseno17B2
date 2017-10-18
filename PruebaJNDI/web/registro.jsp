@@ -18,9 +18,9 @@
         <form action="Grabador.jsp" method="POST">
             <table>
                 <tr><td>Usuario:                </td><td><input type="text" placeholder="Nombre de Usuario" name="username"></td></tr>
-                <tr><td>Contraseña:             </td><td><input type="text" placeholder="Contraseña" name="pwd"></td></tr>
+                <tr><td>Contraseña:             </td><td><input type="password" placeholder="Contraseña" name="pwd"></td></tr>
                 <tr><td>Repite Constraseña:     </td><td><input type="password" placeholder="Contraseña" name="rpwd"></td></tr>
-                <tr><td>Nombre:                 </td><td><input type="password" placeholder="Nombre" name="name"></td></tr>
+                <tr><td>Nombre:                 </td><td><input type="text" placeholder="Nombre" name="name"></td></tr>
                 <tr><td>Apellido Parterno:      </td><td><input type="text" placeholder="Primer Apellido" name="appat"></td></tr>
                 <tr><td>Apellido Materno:       </td><td><input type="text" placeholder="Segundo Apellido" name="apmat"></td></tr>
                 <tr><td>Correo:                 </td><td><input type="text" placeholder="ejemplo@dominio.com" name="mail"></td></tr>
