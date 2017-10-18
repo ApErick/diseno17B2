@@ -36,7 +36,7 @@ public class UsuariosDAOImp implements UsuariosDao{
         try{
             stmt = conn.createStatement();
             int bloqueado=0;
-            stmt.execute("insert into usuario (usr,pass,email,nom,app,apm,edad,face,bloqueado) values('"+u.getUsuario()+"','"+u.getPass()+"','"+u.getCorreo()+"','"+u.getNombre()+"','"+u.getApp()+"','"+u.getApm()+"',13,'"+u.getFace()+"',0)");
+            stmt.execute("insert into app.usuario (usr,pass,email,nom,app,apm,edad,face,bloqueado) values('"+u.getUsuario()+"','"+u.getPass()+"','"+u.getCorreo()+"','"+u.getNombre()+"','"+u.getApp()+"','"+u.getApm()+"',13,'"+u.getFace()+"',0)");
             stmt.close();
         }
         catch (SQLException sqlExcept){
@@ -49,7 +49,7 @@ public class UsuariosDAOImp implements UsuariosDao{
         try{
             stmt = conn.createStatement();
             //stmt.execute("update "+tableName+"set pass='"+u.getPass()+"', nom='"+u.getNombre()+"', app='"+u.getApp()+"', apm='"+u.getApm()+"', edad="+u.getEdad()+", face='"+u.getFace()+"' where email='"+u.getCorreo()+"'");
-            stmt.execute("update usuario set usr='"+u.getUsuario()+"', pass='"+u.getPass()+"', nom='"+u.getNombre()+"', app='"+u.getApp()+"', apm='"+u.getApm()+"', edad="+u.getEdad()+", face='"+u.getFace()+"', bloqueado=0 where email='"+u.getCorreo()+"'");
+            stmt.execute("update app.usuario set usr='"+u.getUsuario()+"', pass='"+u.getPass()+"', nom='"+u.getNombre()+"', app='"+u.getApp()+"', apm='"+u.getApm()+"', edad="+u.getEdad()+", face='"+u.getFace()+"', bloqueado=0 where email='"+u.getCorreo()+"'");
             stmt.close();
         }
         catch (SQLException sqlExcept){
