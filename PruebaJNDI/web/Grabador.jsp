@@ -12,7 +12,8 @@
         <title>Grabador</title>
     </head>
     
-        <h1>SOY UN GRABADOR</h1>
+    <h1>USUARIO REGISTRADO CON EXITO<BR/></h1>
+        <a href="index.html">INICIA SESIÓN</a>
         
         <%
                 dao.Usuario usuario = new dao.Usuario();
